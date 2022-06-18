@@ -149,22 +149,25 @@ def detect(save_img=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     # 不同大小模型对应的参数
-    parser.add_argument('--weights', nargs='+', type=str, default='yolov5s.pt', help='model.pt path(s)')
+    parser.add_argument('--weights', nargs='+', type=str, default='runs/train/exp3/weights/best.pt', help='model.pt path(s)')
     # 识别数据, 可以是文件夹/单一图片/视频
-    parser.add_argument('--source', type=str, default='data/images', help='source')  # file/folder, 0 for webcam
+    parser.add_argument('--source', type=str, default='data/fewshot_logo/Round1/images/val', help='source')  # file/folder, 0 for webcam
     # 在img-size上进行识别, 再将识别框按比例放大至原图尺寸
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
     # 置信度/确信程度, 超过conf-thres的识别结果才会显示出来
-    parser.add_argument('--conf-thres', type=float, default=0.25, help='object confidence threshold')
+    parser.add_argument('--conf-thres', type=float, default=0.2, help='object confidence threshold')
     # 使用IoU方式实现NMS(Non Maximum Suppression), 重叠程度超过iou-thres的会被抑制
     parser.add_argument('--iou-thres', type=float, default=0.45, help='IOU threshold for NMS')
     # 电脑环境
     parser.add_argument('--device', default='', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
     # 显示结果. 如果在命令行中运行, 加上'--view-img'即可, 如果使用pycharm运行, 在Run Configuration中的Parameters添加--view-img即可
     parser.add_argument('--view-img', action='store_true', help='display results')
-    parser.add_argument('--save-txt', action='store_true', help='save results to *.txt')
-    parser.add_argument('--save-conf', action='store_true', help='save confidences in --save-txt labels')
-    parser.add_argument('--nosave', action='store_true', help='do not save images/videos')
+    # parser.add_argument('--view-img', default=False, help='display results')
+    # parser.add_argument('--save-txt', action='store_true', help='save results to *.txt')
+    parser.add_argument('--save-txt', default=True, help='save results to *.txt')
+    # parser.add_argument('--save-conf', action='store_true', help='save confidences in --save-txt labels')
+    parser.add_argument('--save-conf', default=True, help='save confidences in --save-txt labels')
+    parser.add_argument('--nosave', default=True, help='do not save images/videos')
     # 只对指定的classes进行识别
     parser.add_argument('--classes', nargs='+', type=int, help='filter by class: --class 0, or --class 0 2 3')
     # 增强

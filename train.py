@@ -456,15 +456,18 @@ def train(hyp, opt, device, tb_writer=None):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     # 初始化模型权重, default可以设置为已经训练好的模型权重, 不设置则从头开始训练
-    parser.add_argument('--weights', type=str, default='', help='initial weights path')
+    parser.add_argument('--weights', type=str, default='yolov5l.pt', help='initial weights path')
     # 默认模型配置, default可以设置为模型参数
-    parser.add_argument('--cfg', type=str, default='models/yolov5s.yaml', help='model.yaml path')
-    # 数据集, 可以填入data目录下的4个数据集对应的yaml文件
-    parser.add_argument('--data', type=str, default='data/coco128.yaml', help='data.yaml path')
+    parser.add_argument('--cfg', type=str, default='models/yolov5l.yaml', help='model.yaml path')
+    # 数据集, 可以填入data目录下的4个数据集对应的yaml文件, 或者为自己的数据集设计的yaml文件
+    # parser.add_argument('--data', type=str, default='data/streetNumber.yaml', help='data.yaml path')
+    parser.add_argument('--data', type=str, default='data/coco_logo.yaml', help='data.yaml path')
     # 超参数, 可以填入data目录下的2个超参数文件hyp.scratch/hyp.finetune.yaml
     parser.add_argument('--hyp', type=str, default='data/hyp.scratch.yaml', help='hyperparameters path')
-    parser.add_argument('--epochs', type=int, default=300)
+    # 训练epoch数量, 可以现设一个小值, 逐渐增大, 默认为300
+    parser.add_argument('--epochs', type=int, default=60)
     parser.add_argument('--batch-size', type=int, default=16, help='total batch size for all GPUs')
+    # 投入YOLO的图片尺寸, 默认为[640, 640]
     parser.add_argument('--img-size', nargs='+', type=int, default=[640, 640], help='[train, test] image sizes')
     # 减少填充程度(比如把长方形填充成接近正方形)
     parser.add_argument('--rect', action='store_true', help='rectangular training')
