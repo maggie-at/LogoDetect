@@ -26,7 +26,7 @@ pandas~=1.3.5
 
 # extras --------------------------------------
 thop~=0.0.31-2005241907
-pycocotools>=2.0  # COCO mAP
+pycocotools>=2.0.11  # COCO mAP
 
 sklearn~=0.0
 scikit-learn~=1.1.1
